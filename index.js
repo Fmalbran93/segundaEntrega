@@ -37,11 +37,27 @@ console.log(arrayProductos);
 
 function pregunta() {
   alert("Bienvenido a la Configuracion de tu menu en PedidosCochera");
-  let opcion = parseInt(prompt("Ingrese una opción: \n 1) Agregar Producto Nuevo \n 2) Quitar Producto \n 3) Modificación de Producto \n 4) Consultar productos \n 5) Salir"));
+  let opcion = parseInt(prompt("Ingrese una opción: \n 1) Consultar productos \n 2)Agregar Producto Nuevo  \n 3) Quitar Producto  \n 4) Modificación de Producto \n 5) Salir"));
   return opcion;
 }
 
-/* pregunta(); */
+//Función para consultar un producto:
+
+function consultaProductos() {
+  do{
+    id = parseInt(prompt("Ingrese el Id del producto: "));
+    if (id > 0 && id <= arrayProductos.length){
+      let productos = arrayProductos.find(productos => productos.id === id);
+      console.log(productos);
+      
+    } else {
+      alert("Ingrese un id valido! ")
+    }
+
+  } while (id <= 0 || id > arrayProductos.length)
+}
+
+console.log();
 
 //Función para Crear un nuevo producto:
 
@@ -94,48 +110,20 @@ function modificacionProducto (){
   }
 
 
-//Función para consultar un producto:
-
-function consultaProductos() {
-  do{
-    id = parseInt(prompt("Ingrese el Id del producto: "));
-    if (id > 0 && id <= arrayProductos.length){
-      let productos = arrayProductos.find(productos => productos.id === id);
-      console.log(productos);
-      
-    } else {
-      alert("Ingrese un id valido! ")
-    }
-
-  } while (id <= 0 || id > arrayProductos.length)
-}
-
-console.log();
-
-
-/* const arrayProductoTipo = arrayProductos.filter(producto => producto.tipo === "completa");
-
-console.log("Filter: ");
-console.log(arrayProductoTipo);
-*/
-
-function opcionErronea() {
-  producto = parseInt(prompt("Esa opcion no esta en el menu... Ingrese una opción correcta: \n 1) Agregar Producto Nuevo \n 2) Quitar Producto \n 3) Modificación de Producto \n 4) Consultar productos \n 5) Salir" ));
-}
 
 let opcion = pregunta();
 switch (opcion) {
     case 1:
-      nuevoProducto();
+      consultaProductos();
         break;
     case 2:
-      quitarProducto();
+      nuevoProducto();
         break;
     case 3:
-        modificacionProducto();
+        quitarProducto();
         break;
     case 4:
-        consultaProductos();
+        modificacionProducto();
         break;
     case 5:
         salir();
