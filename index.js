@@ -37,7 +37,7 @@ console.log(arrayProductos);
 
 function pregunta() {
   alert("Bienvenido a la Configuracion de tu menu en PedidosCochera");
-  let opcion = parseInt(prompt("Ingrese una opción: \n 1) Consultar productos \n 2)Agregar Producto Nuevo  \n 3) Quitar Producto  \n 4) Modificación de Producto \n 5) Salir"));
+  let opcion = parseInt(prompt("Ingrese una opción: \n 1) Consultar productos \n 2) Agregar Producto Nuevo  \n 3) Quitar Producto  \n 4) Modificación de Producto \n 5) Salir"));
   return opcion;
 }
 
@@ -62,17 +62,29 @@ console.log();
 //Función para Crear un nuevo producto:
 
 function nuevoProducto() {
-  id = parseInt(prompt("Ingrese el Id del producto: "));
-  let nombre = prompt("Ingrese el nombre del producto: ");
-  let tipo = prompt("tipo de producto: ");
-  let precio = parseInt(prompt("Ingrese el precio del producto: "));
-  let Producto = new Productos(id, nombre, tipo, precio);
-  arrayProductos.push(Producto);
-  console.log(arrayProductos);
-}
+  do{
+    id = parseInt(prompt("Ingrese el Id del producto: "));
+    if (!arrayProductos.some(producto => producto.id === id)){
+      let nombre = prompt("Ingrese el nombre del producto: ");
+      let tipo = prompt("tipo de producto: ");
+      let precio = parseInt(prompt("Ingrese el precio del producto: "));
+      let Producto = new Productos(id, nombre, tipo, precio);
+      arrayProductos.push(Producto);
+      console.log(arrayProductos);
+      let productos = arrayProductos.find(productos => productos.id === id);
+      console.log(productos);
+      id = -1
+    } else {
+      alert("Ese id ya esta en uso, Por favor ingrese un id nuevo")
+    }
+
+  } while (arrayProductos.some(producto => producto.id === id))
+  }
+
 
 arrayProductos.forEach((producto) => {
   console.log(producto);
+  
 } )
 
 //Función para dar Quitar producto:
@@ -109,7 +121,9 @@ function modificacionProducto (){
   console.log(arrayProductos)
   }
 
-
+function salir (){
+  alert("gracias y vuelvas prontos! ")
+}
 
 let opcion = pregunta();
 switch (opcion) {
